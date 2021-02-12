@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+    
+</head>
+<body>
+   
+      
+    <form action="" style="border:1px solid #ccc" method="POST">
+        <div class="container">
+          <h1>Sign Up</h1>
+          <p>Please fill in this form to create an account.</p>
+          <hr>
+      
+          <input type="text" placeholder="Username" name="username"  id = 'username' required>
+      
+          <input type="text" placeholder="Phone Number" name="phone" id = 'phone' required>
+
+
+          <input type="email" placeholder="Enter email" name="email" id = 'email' required>
+      
+          <input type="password" placeholder="Password" name="password" id = 'password' required>
+          
+          <label>
+            <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+          </label>
+                
+          <div class="clearfix">
+            <button type="button" class="cancelbtn">Cancel</button>
+            <button type="submit" class="signupbtn" onclick="saveEmployee()">Sign Up</button>
+          </div>
+        </div>
+      </form>
+
+
+
+      <script>
+        $("#username").focus();
+        function validateAndGetFormData() {
+        var userVar = $("#username").val();
+        if (userVar === "") {
+        alert("Employee ID Required Value");
+        $("#username").focus();
+        return "";
+        }
+        var phoneVar = $("#phone").val();
+        if (phoneVar === "") {
+        alert("Employee Name is Required Value");
+        $("#phone").focus();
+        return "";
+        }
+        var emailVar = $("#email").val();
+        if (emailVar === "") {
+        alert("Employee Email is Required Value");
+        $("#email").focus();
+        return "";
+        }
+
+        var passwordVar = $("#password").val();
+        if (passwordVar === "") {
+        alert("Employee Email is Required Value");
+        $("#password").focus();
+        return "";
+        }
+
+        var jsonStrObj = {
+        user: userVar,
+        phone: phoneVar,
+        email: emailVar,
+        password: passwordVar
+
+        };
+        return JSON.stringify(jsonStrObj);
+        }
+
+        function resetForm() {
+        $("#username").val("")
+        $("#phone").val("");
+        $("#email").val("");
+        $("#password").val("");
+
+        $("#username").focus();
+        }
+
+        function saveEmployee() {
+        var jsonStr = validateAndGetFormData();
+        if (jsonStr === "") {
+        return;
+        }
+        var putReqStr = createPUTRequest("90935420|-31948797699865486|90931848",
+        jsonStr, "login", "users");
+        jQuery.ajaxSetup({async: false});
+        var resultObj = executeCommandAtGivenBaseUrl(putReqStr,
+        "http://api.login2explore.com:5577", "/api/iml");
+        jQuery.ajaxSetup({async: true});
+        resetForm();
+        }
+        </script>
+</body>
+</html>
+</body>
+</html>
